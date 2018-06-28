@@ -2,10 +2,10 @@
 An Alfred Workflow that count character &amp; word for you
 
 ## Screenshot
-TBA
+![Character & Word Counter Preview](preview.gif)
 
-## Download
-TBA
+## Installation
+Download from [Release 1.0](https://github.com/ibnuh/alfred-character-counter-workflow/releases/tag/1.0)
 
 ## Usage
 Keyword: `cw`
