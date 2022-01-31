@@ -12,7 +12,7 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-character-co
 ![Character & Word Counter Preview](preview.gif)
 
 ## Installation
-Download from [Release 1.0](https://github.com/ibnuh/alfred-character-counter-workflow/releases/tag/1.0)
+Download from [Release 1.0](https://github.com/giovannicoppola/alfred-character-counter/releases/latest/)
 
 ## Usage
 Keyword: `cw`
