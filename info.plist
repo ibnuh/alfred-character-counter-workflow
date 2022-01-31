@@ -94,7 +94,7 @@ EOB</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>https://github.com/giovannicoppola/alfred-character-counter</string>
 	<key>uidata</key>
 	<dict>
 		<key>7547254A-2492-49D8-AF1C-EE388E43C92E</key>
@@ -105,7 +105,11 @@ EOB</string>
 			<integer>110</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.1</string>
 	<key>webaddress</key>
-	<string>https://muhammadibnuh.com</string>
+	<string></string>
 </dict>
 </plist>
