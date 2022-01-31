@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>ibnuh.alfred.counter</string>
+	<string>giovanni-ibnuh.alfred.counter</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
-	<string>Muhammad Ibnuh</string>
+	<string>giovanni from Muhammad Ibnuh</string>
 	<key>description</key>
 	<string>An Alfred Workflow that counts character &amp; word for you</string>
 	<key>disabled</key>
@@ -25,6 +25,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -44,9 +46,34 @@
 				<key>runningsubtext</key>
 				<string>Counting "{query}"</string>
 				<key>script</key>
-				<string>php word.php "{query}"</string>
+				<string>#!/bin/zsh
+
+myText=$1
+myTextLength=${#myText}
+myWordLength=$(echo -n "$myText" | wc -w)
+
+
+cat &lt;&lt; EOB
+{"items": [
+
+	{
+		"title": "character count: $myTextLength",
+		"subtitle": "$1",
+		"arg": "$1"
+		},
+	
+{
+		"title": "word count: $myWordLength",
+		"subtitle": "$1",
+		"arg": "$1"
+		}
+	
+	
+
+]}
+EOB</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -54,7 +81,7 @@
 				<key>title</key>
 				<string>Character &amp; Word Counter</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -63,7 +90,7 @@
 			<key>uid</key>
 			<string>7547254A-2492-49D8-AF1C-EE388E43C92E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
