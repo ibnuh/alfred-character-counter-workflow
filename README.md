@@ -8,8 +8,6 @@ From [this](https://github.com/ibnuh/alfred-character-counter-workflow/releases/
 src="https://img.shields.io/github/downloads/giovannicoppola/alfred-character-counter/total?color=purple&label=Downloads"><br/>
 </a>
 
-## Screenshot
-![Character & Word Counter Preview](preview.gif)
 
 ## Installation
 Download from [Release 1.0](https://github.com/giovannicoppola/alfred-character-counter/releases/latest/)
