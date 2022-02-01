@@ -10,7 +10,7 @@ src="https://img.shields.io/github/downloads/giovannicoppola/alfred-character-co
 
 
 ## Installation
-Download from [Release 1.0](https://github.com/giovannicoppola/alfred-character-counter/releases/latest/)
+Download original [Release 1.0](https://github.com/giovannicoppola/alfred-character-counter/releases/latest/)
 
 ## Usage
 Keyword: `cw`
