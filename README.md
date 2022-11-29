@@ -1,5 +1,5 @@
 # Character & Word Counter for Alfred
-An Alfred Workflow that counts characters &amp; words for you
+An Alfred Workflow that counts characters &amp; words
 
 From [this](https://github.com/ibnuh/alfred-character-counter-workflow/releases/tag/1.0) workflow, minus PHP
 
@@ -8,6 +8,7 @@ From [this](https://github.com/ibnuh/alfred-character-counter-workflow/releases/
 src="https://img.shields.io/github/downloads/giovannicoppola/alfred-character-counter/total?color=purple&label=Downloads"><br/>
 </a>
 
+![demo](characterCountDemo.png)
 
 ## Installation
 Download the latest [release](https://github.com/giovannicoppola/alfred-character-counter/releases/latest/)
