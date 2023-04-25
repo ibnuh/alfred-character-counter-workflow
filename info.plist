@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>ibnuh.alfred.counter</string>
+	<string>giovanni-ibnuh.alfred.counter</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
-	<string>Muhammad Ibnuh</string>
+	<string>giovanni from Muhammad Ibnuh</string>
 	<key>description</key>
-	<string>An Alfred Workflow that counts character &amp; word for you</string>
+	<string>An Alfred Workflow to count characters &amp; words</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -25,6 +25,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -32,7 +34,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>cw</string>
+				<string>{var:mainkeyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -44,9 +46,35 @@
 				<key>runningsubtext</key>
 				<string>Counting "{query}"</string>
 				<key>script</key>
-				<string>php word.php "{query}"</string>
+				<string>#!/bin/zsh
+
+myText=$1
+
+myTextLength=$(echo -n "$myText" | wc -c)
+myWordLength=$(echo -n "$myText" | wc -w)
+
+
+cat &lt;&lt; EOB
+{"items": [
+
+	{
+		"title": "character count: $myTextLength",
+		"subtitle": "$myText",
+		"arg": ""
+		},
+	
+{
+		"title": "word count: $myWordLength",
+		"subtitle": "$myText",
+		"arg": ""
+		}
+	
+	
+
+]}
+EOB</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -54,7 +82,7 @@
 				<key>title</key>
 				<string>Character &amp; Word Counter</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -63,22 +91,51 @@
 			<key>uid</key>
 			<string>7547254A-2492-49D8-AF1C-EE388E43C92E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>An Alfred Workflow to count characters &amp; words
+https://github.com/giovannicoppola/alfred-character-counter</string>
 	<key>uidata</key>
 	<dict>
 		<key>7547254A-2492-49D8-AF1C-EE388E43C92E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>310</integer>
+			<real>310</real>
 			<key>ypos</key>
-			<integer>110</integer>
+			<real>110</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>cw</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>mainkeyword</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.2</string>
 	<key>webaddress</key>
-	<string>https://muhammadibnuh.com</string>
+	<string>https://github.com/giovannicoppola/alfred-character-counter</string>
 </dict>
 </plist>
