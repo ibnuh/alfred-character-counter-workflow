@@ -1,0 +1,96 @@
+#!/usr/bin/env zsh
+# Character & Word Counter — Alfred Script Filter (JSON)
+# Zero dependencies. Uses zsh only (ships with macOS).
+
+emulate -L zsh
+setopt extended_glob
+setopt multibyte
+setopt nounset
+
+text=${1-}
+
+# ${#var} counts Unicode characters when MULTIBYTE is on.
+chars=${#text}
+
+# Byte length of the UTF-8 representation.
+bytes=$(printf '%s' "$text" | wc -c | tr -d '[:space:]')
+
+# Whitespace-stripped character count.
+no_ws=${text//[[:space:]]/}
+chars_no_ws=${#no_ws}
+
+# Word count: whitespace-separated tokens (empty input → 0).
+if [[ -z ${text//[[:space:]]/} ]]; then
+  words=0
+else
+  # ${(z)text} splits like the shell; (=) is IFS word-split.
+  word_array=(${=text})
+  words=${#word_array}
+fi
+
+# Line count: empty → 0; otherwise number of newline-separated rows.
+if [[ -z $text ]]; then
+  lines=0
+else
+  line_array=(${(f)text})
+  lines=${#line_array}
+fi
+
+# Escape a string for JSON double quotes.
+json_escape() {
+  local s=$1
+  s=${s//\\/\\\\}
+  s=${s//\"/\\\"}
+  s=${s//$'\n'/\\n}
+  s=${s//$'\r'/\\r}
+  s=${s//$'\t'/\\t}
+  printf '%s' "$s"
+}
+
+icon_path="icon.png"
+subtitle_suffix="  ·  ↩ copy"
+
+item() {
+  # $1 title (number), $2 subtitle label, $3 arg to copy
+  local title=$1 label=$2 arg=$3
+  local subtitle
+  subtitle="$(json_escape "${label}${subtitle_suffix}")"
+  cat <<EOF
+    {
+      "title": "$(json_escape "$title")",
+      "subtitle": "$subtitle",
+      "arg": "$(json_escape "$arg")",
+      "valid": true,
+      "icon": { "path": "$icon_path" },
+      "variables": { "paste": "0" },
+      "text": {
+        "copy": "$(json_escape "$arg")",
+        "largetype": "$(json_escape "${title} ${label}")"
+      },
+      "mods": {
+        "cmd": {
+          "valid": true,
+          "arg": "$(json_escape "$arg")",
+          "subtitle": "$(json_escape "Copy and paste ${label}")",
+          "variables": { "paste": "1" }
+        }
+      }
+    }
+EOF
+}
+
+# skipknowledge keeps result order stable (chars → words → …).
+print -r -- '{'
+print -r -- '  "skipknowledge": true,'
+print -r -- '  "items": ['
+item "$chars" "Characters" "$chars"
+print -r -- ','
+item "$words" "Words" "$words"
+print -r -- ','
+item "$chars_no_ws" "Characters (no whitespace)" "$chars_no_ws"
+print -r -- ','
+item "$lines" "Lines" "$lines"
+print -r -- ','
+item "$bytes" "Bytes (UTF-8)" "$bytes"
+print -r -- '  ]'
+print -r -- '}'
