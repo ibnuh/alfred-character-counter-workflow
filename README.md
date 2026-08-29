@@ -67,6 +67,29 @@ chmod +x count build.sh
 | `info.plist` | Alfred 5 workflow definition |
 | `icon.png` | Workflow icon |
 | `build.sh` | Packages the `.alfredworkflow` |
+| `.github/workflows/ci.yml` | PR/master smoke tests + package build |
+| `.github/workflows/release.yml` | Tag release (master only) |
+
+### Releasing
+
+Releases are tag-driven and only publish when the tag points at a commit on `master`.
+
+1. Bump `version` in `info.plist` (example: `2.0.0`).
+2. Merge to `master`.
+3. Tag and push from `master`:
+
+```bash
+git checkout master
+git pull
+git tag -a v2.0.0 -m "v2.0.0"
+git push origin v2.0.0
+```
+
+4. The **Release** workflow checks:
+   - the tag commit is on `origin/master`
+   - tag `vX.Y.Z` matches `info.plist` `version`
+   - smoke tests pass
+5. It uploads `Character-and-Word-Counter.alfredworkflow` to the GitHub Release.
 
 ## Credits
 

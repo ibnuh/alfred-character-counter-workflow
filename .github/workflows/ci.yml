@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install zsh
+        run: sudo apt-get update && sudo apt-get install -y zsh
+
+      - name: Smoke-test Script Filter JSON
+        run: |
+          chmod +x count
+          python3 - <<'PY'
+          import json, subprocess
+
+          def counts(text: str):
+              data = json.loads(subprocess.check_output(["./count", text], text=True))
+              assert data.get("skipknowledge") is True
+              assert len(data["items"]) == 5
+              return [int(i["title"]) for i in data["items"]]
+
+          def expected(text: str):
+              chars = len(text)
+              words = 0 if not text.strip() else len(text.split())
+              chars_no = sum(1 for c in text if not c.isspace())
+              lines = 0 if text == "" else len(text.splitlines())
+              raw = len(text.encode("utf-8"))
+              return [chars, words, chars_no, lines, raw]
+
+          cases = ["", "hello world", "Hello 世界 👋", "a\nb\nc", "   ", "café"]
+          for case in cases:
+              got = counts(case)
+              exp = expected(case)
+              assert got == exp, (case, got, exp)
+          print("smoke tests passed")
+          PY
+
+      - name: Build .alfredworkflow
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Character-and-Word-Counter
+          path: dist/Character-and-Word-Counter.alfredworkflow
+          if-no-files-found: error

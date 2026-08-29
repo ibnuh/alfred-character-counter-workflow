@@ -1,0 +1,89 @@
+name: Release
+
+# Tag-driven release. Only publishes when the tag points at a commit on master.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require tag commit on master
+        run: |
+          set -euo pipefail
+          git fetch origin master
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+            echo "::error::Tag $GITHUB_REF_NAME must point to a commit that is on origin/master. Refusing release."
+            exit 1
+          fi
+          echo "OK: $GITHUB_SHA is reachable from origin/master"
+
+      - name: Match tag to info.plist version
+        id: version
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+          TAG_VERSION="${TAG#v}"
+          PLIST_VERSION="$(python3 - <<'PY'
+          import plistlib
+          with open("info.plist", "rb") as f:
+              print(plistlib.load(f)["version"])
+          PY
+          )"
+          echo "tag=$TAG"
+          echo "tag_version=$TAG_VERSION"
+          echo "plist_version=$PLIST_VERSION"
+          if [[ "$TAG_VERSION" != "$PLIST_VERSION" ]]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match info.plist version ($PLIST_VERSION)."
+            exit 1
+          fi
+          echo "version=$PLIST_VERSION" >> "$GITHUB_OUTPUT"
+          echo "asset=Character-and-Word-Counter.alfredworkflow" >> "$GITHUB_OUTPUT"
+
+      - name: Install zsh
+        run: sudo apt-get update && sudo apt-get install -y zsh
+
+      - name: Smoke-test and build
+        run: |
+          chmod +x count build.sh
+          ./count 'hello world' | python3 -m json.tool >/dev/null
+          ./build.sh
+          test -f "dist/${{ steps.version.outputs.asset }}"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ASSET="dist/${{ steps.version.outputs.asset }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES="$(cat <<EOF
+          ## Character & Word Counter v${VERSION}
+
+          Alfred 5 workflow (zero dependencies, system zsh).
+
+          ### Install
+          1. Download \`${{ steps.version.outputs.asset }}\`
+          2. Double-click to import into Alfred
+          3. Optional: Configure Workflow to change the keyword (default \`cw\`)
+
+          ### Usage
+          - Keyword: \`cw <text>\`
+          - Universal Action on selected text
+          - \`↩\` copy · \`⌘↩\` copy and paste
+          EOF
+          )"
+          gh release create "$GITHUB_REF_NAME" "$ASSET" \
+            --title "v${VERSION}" \
+            --notes "$NOTES" \
+            --verify-tag
