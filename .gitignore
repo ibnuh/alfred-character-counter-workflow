@@ -1,2 +1,7 @@
+.DS_Store
+prefs.plist
+settings.plist
+*.alfredworkflow
+/dist/
 composer.phar
 /vendor/

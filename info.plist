@@ -7,11 +7,89 @@
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
-	<dict/>
+	<dict>
+		<key>02FADC77-1D9E-442C-B279-4BD4FFA2F5E3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>93D723AC-4954-4D54-885B-C804794A21B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7EE4F83C-28E5-43F8-A807-556BDEB2CF90</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>02FADC77-1D9E-442C-B279-4BD4FFA2F5E3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>93D723AC-4954-4D54-885B-C804794A21B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E6C70587-BDDA-40B4-963B-F27F402A9987</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>paste-yes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>34E21E69-3E07-4D88-B350-E138080A7719</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>34E21E69-3E07-4D88-B350-E138080A7719</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>690D18A5-5EDF-4EF6-83A0-9660A4FCA7F0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E6C70587-BDDA-40B4-963B-F27F402A9987</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>690D18A5-5EDF-4EF6-83A0-9660A4FCA7F0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
 	<key>createdby</key>
 	<string>Muhammad Ibnuh</string>
 	<key>description</key>
-	<string>An Alfred Workflow that counts character &amp; word for you</string>
+	<string>Count characters, words, lines, and bytes — zero dependencies</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -21,64 +99,283 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Character &amp; Word Counter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>7EE4F83C-28E5-43F8-A807-556BDEB2CF90</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>cw</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
-				<false/>
+				<true/>
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Counting "{query}"</string>
+				<string>Counting…</string>
 				<key>script</key>
-				<string>php word.php "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
 				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>count</string>
+				<key>skipuniversalaction</key>
+				<false/>
 				<key>subtext</key>
-				<string>Count "{query}"</string>
+				<string>Type text to count characters, words, lines, and bytes</string>
 				<key>title</key>
 				<string>Character &amp; Word Counter</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>7547254A-2492-49D8-AF1C-EE388E43C92E</string>
+			<string>02FADC77-1D9E-442C-B279-4BD4FFA2F5E3</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:paste}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Paste</string>
+						<key>uid</key>
+						<string>paste-yes</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Copy only</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>93D723AC-4954-4D54-885B-C804794A21B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>34E21E69-3E07-4D88-B350-E138080A7719</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E6C70587-BDDA-40B4-963B-F27F402A9987</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Copied {query}</string>
+				<key>title</key>
+				<string>Character &amp; Word Counter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>690D18A5-5EDF-4EF6-83A0-9660A4FCA7F0</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># Character &amp; Word Counter
+
+Count characters, words, lines, and bytes of any text in Alfred.
+
+## Requirements
+
+- [Alfred 5](https://www.alfredapp.com/) with the Powerpack
+- macOS (uses the system `zsh` only — no PHP, Python, or Homebrew deps)
+
+## Usage
+
+### Keyword
+
+1. Type `cw` (configurable) followed by a space and your text.
+2. Alfred shows live counts: characters, words, characters without whitespace, lines, and UTF-8 bytes.
+3. Press **↩** on a row to copy that number.
+4. Press **⌘↩** to copy and paste into the frontmost app.
+
+### Universal Action
+
+1. Select text in any app.
+2. Trigger Alfred's Universal Actions hotkey.
+3. Choose **Character &amp; Word Counter**.
+4. Pick a metric and copy (or ⌘↩ to paste).
+
+## Configuration
+
+Open the workflow → **Configure Workflow…** to change the keyword (default `cw`).
+
+## Credits
+
+- Icon: [Flaticon](https://www.flaticon.com/free-icon/alphabet-letters-a-b-and-c_27482)
+</string>
 	<key>uidata</key>
 	<dict>
-		<key>7547254A-2492-49D8-AF1C-EE388E43C92E</key>
+		<key>7EE4F83C-28E5-43F8-A807-556BDEB2CF90</key>
+		<dict>
+			<key>note</key>
+			<string>Select text → Universal Actions</string>
+			<key>xpos</key>
+			<real>30.0</real>
+			<key>ypos</key>
+			<real>30.0</real>
+		</dict>
+		<key>02FADC77-1D9E-442C-B279-4BD4FFA2F5E3</key>
+		<dict>
+			<key>note</key>
+			<string>External zsh script (count). argv, no trim.</string>
+			<key>xpos</key>
+			<real>250.0</real>
+			<key>ypos</key>
+			<real>120.0</real>
+		</dict>
+		<key>93D723AC-4954-4D54-885B-C804794A21B4</key>
+		<dict>
+			<key>note</key>
+			<string>⌘↩ sets paste=1</string>
+			<key>xpos</key>
+			<real>480.0</real>
+			<key>ypos</key>
+			<real>140.0</real>
+		</dict>
+		<key>34E21E69-3E07-4D88-B350-E138080A7719</key>
+		<dict>
+			<key>note</key>
+			<string>Copy only</string>
+			<key>xpos</key>
+			<real>700.0</real>
+			<key>ypos</key>
+			<real>200.0</real>
+		</dict>
+		<key>E6C70587-BDDA-40B4-963B-F27F402A9987</key>
+		<dict>
+			<key>note</key>
+			<string>Copy + paste</string>
+			<key>xpos</key>
+			<real>700.0</real>
+			<key>ypos</key>
+			<real>60.0</real>
+		</dict>
+		<key>690D18A5-5EDF-4EF6-83A0-9660A4FCA7F0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>310</integer>
+			<real>920.0</real>
 			<key>ypos</key>
-			<integer>110</integer>
+			<real>120.0</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>cw</string>
+				<key>placeholder</key>
+				<string>cw</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword used to invoke the counter. Default is cw.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2.0.0</string>
 	<key>webaddress</key>
-	<string>https://muhammadibnuh.com</string>
+	<string>https://github.com/ibnuh/alfred-character-counter-workflow</string>
 </dict>
 </plist>
